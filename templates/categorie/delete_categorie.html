@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+<title>Supprimer une Catégorie</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="center">
+    <h1>Suppression de Catégorie {{ Categorie.id }} ?</h1>
+</div>
+
+<div class="center">
+    <span>Êtes-vous sûr de vouloir supprimer la Catégorie {{ Categorie.nom }} ? Cette action est irréversible.</span>
+</div>
+    {% if Voitures | length>=1 %}
+        <div class="cascade">
+            <span>Celle ci entraine aussi la suppréssion de :</span>
+            {% for voiture in Voitures %}
+                <span>Voiture {{ voiture.id }} : {{ voiture.nom }}</span>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+<fieldset>
+    <div class="center">
+        <button class="delete_button" onclick="window.location.href='/categorie/delete?id={{ id }}';">Supprimer
+        </button>
+        <button onclick="window.location.href='/categorie/show';">Annuler</button>
+    </div>
+</fieldset>
+
+{% endblock %}

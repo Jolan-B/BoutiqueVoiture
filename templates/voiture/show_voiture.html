@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+<title>Voitures</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="center">
+    <h2>Voitures</h2>
+    <img class="clickable" src="/static/images/add.png" onclick="window.location.href='/voiture/add';" />
+    <img class="clickable" src="/static/images/filter.png" onclick="window.location.href='/voiture/filtre';" />
+</div>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Id Voiture</th>
+            <th>Modèle</th>
+            <th>Date Lancement</th>
+            <th>Prix</th>
+            <th>Catégorie</th>
+            <th>Puissance</th>
+            <th>Photo</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if Voitures | length >= 1 %}
+        {% for voiture in Voitures %}
+        <tr>
+            <td>{{ voiture.id }}</td>
+            <td>{{ voiture.nom }}</td>
+            <td>{{ voiture.date }}</td>
+            <td>{{ voiture.prix }} €</td>
+            <td>{{ voiture.categorie }}</td>
+            <td>{{ voiture.puissance }} CV</td>
+            <td> {% if voiture.photo is not none and voiture.photo != "" %}
+                <img style="width:40px;height:40px"
+                    src="{{ url_for('static', filename = 'images/' + voiture['photo']) }}"
+                    alt="photo  de {{ voiture.nom }}">
+                {% else %}
+                <img style="width:40px;height:40px" src="{{ url_for('static', filename='images/no_photo.jpg')}}"
+                    alt="no photo">
+                {% endif %}
+
+            <td>
+                <img class="clickable" src="/static/images/edit.png"
+                    onclick="window.location.href='/voiture/edit?id={{ voiture.id }}';" />
+                <img class="clickable" src="/static/images/delete.png"
+                    onclick="window.location.href='/voiture/delete?id={{ voiture.id }}';" />
+            </td>
+
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td>
+                Pas de Voiture disponible
+            </td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+<div class="remontePage">
+    <img src="/static/images/arrow_circle_up.png" onclick="window.location.href='/voiture/show';" />
+</div>
+
+{% endblock %}

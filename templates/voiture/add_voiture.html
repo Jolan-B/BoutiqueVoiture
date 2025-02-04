@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Ajouter une Voiture</title>
+{% endblock %}
+
+{% block body %}
+<div class="center">
+  <h2>Ajout d'une voiture</h2>
+</div>
+
+  <form method="post" action="/voiture/add" >
+    <fieldset>
+        <label for="nomVoiture">Modèle</label><br>
+        <input id="nomVoiture" type="text" name="nomVoiture" size="18" value="" placeholder="Saisir le modèle"><br>
+
+        <label for="dateLancement">Date de lancement</label><br>
+        <input id="dateLancement" type="date" name="dateLancement" size="10" value="" placeholder="Saisir la date de lancement"><br>
+
+
+        <label for="prixVoiture">Prix de la voiture (€)</label><br>
+        <input id="prixVoiture" type="number" name="prixVoiture" min="0" step="0.01" size="18" value="" placeholder="Saisir le prix de la voiture"><br>
+
+
+        <label for="categorie_id">Catégorie voiture</label><br>
+        <select id="categorie_id" name="categorie_id" required>
+            <option value="">Sélectionner une categorie</option>
+            {% for categorie in Categories %}
+                <option value="{{ categorie.id }}"> {{ categorie.nom }} </option>
+            {% endfor %}
+        </select><br>
+
+
+        <label for="puissance">Puissance de la voiture (CV)</label><br>
+        <input id="puissance" type="number" name="puissance" min="1" size="18" value="" placeholder="Saisir la puissance de la voiture"><br>
+
+
+        <label for="photo">Photo</label><br>
+        <input id="photo" type="text" name="photo" size="18" value="" placeholder="Saisir le nom de la photo de l'article"><br>
+
+        <input type="submit" value="Creer" name="Valider" >
+    </fieldset>
+  </form>
+{% endblock %}

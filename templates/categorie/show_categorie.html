@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+<title>Catégories</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="center">
+    <h2>Catégories</h2>
+    <img class="clickable" src="/static/images/add.png" onclick="window.location.href='/categorie/add';"/>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Id Catégorie</th>
+        <th>Désignation</th>
+        <th>Page Catalogue</th>
+        <th>Logo</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if Categories | length >= 1 %}
+    {% for categorie in Categories %}
+    <tr>
+        <td>{{ categorie.id }}</td>
+        <td>{{ categorie.nom }}</td>
+        <td>{{ categorie.catalogue }}</td>
+        <td> {% if categorie.photo is not none and categorie.photo != "" %}
+            <img style="width:40px;height:40px" src="{{ url_for('static', filename = 'images/' + categorie['photo']) }}"
+                 alt="logo  de {{ categorie.nom }}">
+            {% else %}
+            <img style="width:40px;height:40px" src="{{ url_for('static', filename='images/no_logo.jpg')}}"
+                 alt="no logo">
+            {% endif %}
+        <td>
+            <img class="clickable" src="/static/images/edit.png"
+                 onclick="window.location.href='/categorie/edit?id={{ categorie.id }}';"/>
+            <img class="clickable" src="/static/images/delete.png"
+                 onclick="window.location.href='/categorie/confirm_delete?id={{ categorie.id }}';"/>
+        </td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr>
+        <td>
+            pas de catégorie
+        </td>
+    </tr>
+    {% endif %}
+    </tbody>
+</table>
+
+<div class="remontePage">
+    <img src="/static/images/arrow_circle_up.png" onclick="window.location.href='/categorie/show';"/>
+</div>
+
+{% endblock %}

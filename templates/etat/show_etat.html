@@ -1,0 +1,129 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+<title>État</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="center">
+    <h2>État par Catégorie</h2>
+</div>
+
+<div class="text_show">
+    <span>Le coût total des {{ EtatCategorie.nbModele }} voiture(s) disponible(s) est de {{ EtatCategorie.prix }}€.</span>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Id Catégorie</th>
+        <th>Nom Catégorie</th>
+        <th>Nombre de Modèles</th>
+        <th>Prix total des Modèles</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if Categories | length >= 1 %}
+    {% for categorie in Categories %}
+    <tr>
+        <td>{{ categorie.id }}</td>
+        <td>{{ categorie.nom }}</td>
+        <td>{{ categorie.nbModele }}</td>
+        {% if categorie.prix != none %}
+        <td>{{ categorie.prix }} €</td>
+        {% else %}
+        <td>0€</td>
+        {% endif %}
+
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr>
+        <td>
+            Pas d'État disponible
+        </td>
+    </tr>
+    {% endif %}
+    </tbody>
+</table>
+
+<div class="center">
+    <h2>État par Prix</h2>
+</div>
+
+<div class="text_show">
+    <span>Le coût moyen d'une voiture est de {{ EtatPrix.prixMoyen }}€</span>
+</div>
+
+<table>
+    <thread>
+        <tr>
+            <th>Tranche de Prix</th>
+            <th>Nombre de Modèles</th>
+            <th>Prix Moyen</th>
+            <th>Moyenne de CV</th>
+        </tr>
+    </tr>
+    </thread>
+    <tbody>
+    {% if Prix | length >= 1 %}
+    {% for prix in Prix %}
+    <tr>
+        <td>{{ prix.prixInf }} €<= et <{{ prix.prixSup }} €</td>
+        <td>{{ prix.nbModele }}</td>
+        <td>{{ prix.prixMoyen }} €</td>
+        <td>{{ prix.cvMoyen }} CV</td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr>
+        <td>
+            Pas d'État disponible
+        </td>
+    </tr>
+    {% endif %}
+    </tbody>
+</table>
+
+<div class="center">
+    <h2>État par Cheval</h2>
+</div>
+
+<div class="text_show">
+    <span>Le nombre total de chevaux est de {{ EtatPuissance.nbCV }}CV. Le coût moyen du CV est de {{ EtatPuissance.prixMoyenCV }}€</span>
+</div>
+
+<table>
+    <thread>
+        <tr>
+            <th>Puissance</th>
+            <th>Nombre de Modèles</th>
+            <th>Prix du CV</th>
+        </tr>
+    </tr>
+    </thread>
+    <tbody>
+    {% if Puissances | length >= 1 %}
+    {% for puissance in Puissances %}
+    <tr>
+        <td>{{ puissance.puissance }} CV</td>
+        <td>{{ puissance.nbModele }}</td>
+        <td>{{ puissance.prixCV }} €</td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr>
+        <td>
+            Pas d'État disponible
+        </td>
+    </tr>
+    {% endif %}
+    </tbody>
+</table>
+
+<div class="remontePage">
+    <img src="/static/images/arrow_circle_up.png" onclick="window.location.href='/etat/show';" />
+</div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Ajouter une Catégorie</title>
+{% endblock %}
+
+{% block body %}
+<div class="center">
+  <h2>Ajout d'une catégorie</h2>
+</div>
+
+  <form method="post" action="/categorie/add" >
+    <fieldset>
+
+        <label for="libelleCategorie">Nom de Catégorie</label><br>
+        <input id="libelleCategorie" type="text" required name="libelleCategorie" size="18" value="" placeholder="Saisir le libelle de la categorie"><br>
+
+        <label for="catalogue">Catalogue</label><br>
+        <input id="catalogue" type="number" required name="catalogue" min="0" step="1" size="18" value="" placeholder="Saisir le catalogue"><br>
+
+
+        <label for="logo">Logo</label><br>
+        <input id="logo" type="text" name="logo" size="18" value="" placeholder="Saisir le logo de la catégorie"><br>
+
+<!--        <label for="logo">Logo</label><br>-->
+<!--        <input id="logo" type="file" name="logo" size="18" value="" placeholder="Saisir le logo de la catégorie"><br>-->
+
+        <input type="submit" value="Creer" name="Valider" >
+
+    </fieldset>
+  </form>
+{% endblock %}

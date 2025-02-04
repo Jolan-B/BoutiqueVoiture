@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Modifier une Voiture</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="center">
+  <h2>Modifier {{ Base.nom }}</h2>
+</div>
+
+  <form method="post" action="/voiture/edit" >
+    <fieldset>
+
+        <input type="hidden" name="id" size="18" value="{{ Base.id }}" id="id">
+
+        <label for="nomVoiture">Nom</label><br>
+        <input id="nomVoiture" type="text" name="nomVoiture" size="18" value="{{ Base.nom }}"><br>
+
+        <label for="dateLancement">Date de lancement</label><br>
+        <input id="dateLancement" type="date" name="dateLancement" size="10" value="{{ Base.date }}"><br>
+
+        <label for="prixVoiture">Prix de la voiture (€)</label><br>
+        <input id="prixVoiture" type="number" name="prixVoiture" size="18" value="{{ Base.prix }}"><br>
+
+        <label for="categorie_id">Catégorie voiture</label><br>
+        <select id="categorie_id" name="categorie_id" required>
+            <option value="{{ Base.idCategorie }}">{{ Base.categorie }}</option>
+            {% for categorie in Categories %}
+            <option value="{{ categorie.id }}"> {{ categorie.nom }} </option>
+            {% endfor %}
+        </select><br>
+
+        <label for="puissance">Puissance de la voiture (CV)</label><br>
+        <input id="puissance" type="number" name="puissance" size="18" value="{{ Base.puissance }}" placeholder="Saisir la puissance de la voiture"><br>
+
+        <label for="photo">Photo</label><br>
+        <input id="photo" type="text" name="photo" size="18" value="{{ Base.photo }}"><br>
+
+        <input type="submit" value="Modifier" name="Modifier" >
+    </fieldset>
+  </form>
+{% endblock %}

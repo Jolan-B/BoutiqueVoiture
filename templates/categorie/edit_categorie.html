@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Modifier une Catégorie</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="center">
+  <h2>Modifier la Catégorie {{ Base.nom }}</h2>
+</div>
+
+  <form method="post" action="/categorie/edit">
+    <fieldset>
+
+        <label for="id" type="hidden"></label>
+        <input id="id" type="hidden" name="id" value="{{ Base.id }}">
+
+        <label for="nom">Nom de Categorie</label><br>
+        <input id="nom" type="text" name="nom" size="18" value="{{ Base.nom }}"><br>
+
+        <label for="catalogue">Catalogue</label><br>
+        <input id="catalogue" type="number" min="1" name="catalogue" size="18" value="{{ Base.catalogue}}"><br>
+
+        <label for="photo">Logo</label><br>
+        <input id="photo" type="text" name="photo" value="{{ Base.photo }}"><br>
+
+        <input type="submit" value="Modifier" name="Modifier" >
+
+    </fieldset>
+  </form>
+{% endblock %}
